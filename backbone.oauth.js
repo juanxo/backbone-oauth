@@ -43,7 +43,7 @@
 
     // Configures the auth dialog url.
     setupAuthUrl: function() {
-      var url = this.auth_url + '?client_id=' + this.app_id
+      var url = this.auth_url + '?client_id=' + this.client_id
         + '&redirect_uri=' + this.redirect_url
         + '&response_type=token';
       if (this.scope) url += '&scope=' + this.scope;

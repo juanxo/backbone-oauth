@@ -21,6 +21,7 @@ _.extend(Backbone.OAuth.configs.Facebook, {
             }
         });
     }
+});
 
 // Create a new OAuth object and call the auth() method to start the process.
 var FB = new Backbone.OAuth(Backbone.OAuth.configs.Facebook);

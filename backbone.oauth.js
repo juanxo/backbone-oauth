@@ -33,6 +33,10 @@
 
     // Override any default option with the options passed to the constructor.
     _.extend(this, options);
+
+    // Make the onRedirect function publicy available.
+    _.bind(this.onRedirect, this);
+    window.OAuthRedirect = this.onRedirect;
   };
 
   // Inject methods and properties.
@@ -57,31 +61,14 @@
       if (!this.auth_url) throw new Error('No auth url given.');
       if (!this.redirect_url) throw new Error('No redirect url given.');
 
-      var dialogUrl = (this.setupAuthUrl) ? this.setupAuthUrl() : this.auth_url;
-
-      // Continously poll the opened auth dialog's window to see, if the user
-      // was already redirected to the redirect_url. If so, read the
-      // accesss_token from the redirect_uri.
-      var poll = function(that, dialog) {
-        if (dialog.closed) {
-          // User closed the dialog.
-          that.onError();
-        } else if (dialog.location.href.match(that.redirect_url)) {
-          dialog.close();
-
-          // Callback.
-          that.onRedirect(parseHash(dialog.location.hash));
-        } else {
-          setTimeout(poll, 250, that, dialog);
-        }
-      };
-      poll(this, window.open(dialogUrl));
+      this.dialog = window.open(this.setupAuthUrl());    
     },
 
     // Called on redirection inside the OAuth dialog window. This indicates,
     // that the dialog auth process has finished. It has to be checked, if
     // the auth was successful or not.
-    onRedirect: function(params) {
+    onRedirect: function(hash) {
+      var params = parseHash(location.hash);
       if (this.authSuccess(params)) {
         this.onSuccess(params);
       } else {

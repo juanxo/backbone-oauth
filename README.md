@@ -9,7 +9,7 @@ The most simple use case would be something like this:
 // Configurate the Facebook OAuth settings.
 _.extend(Backbone.OAuth.configs.Facebook, {
     client_id: 'YOURAPPID',
-    redirect_url: window.location.href,
+    redirect_url: window.location.protocoll + '//' + window.location.host + '/auth_redirect.html',
 
     // Called after successful authentication.
     onSuccess: function(params) {
@@ -87,7 +87,7 @@ You will need to extend these configuration objects with at least the following 
 Or you can create your own configuration object, that may hold the following properties:
 
 * ```app_id``` (obligatory) Your OAuth provider's app_id.
-* ```redirect_url``` (obligatory) The URL to redirect to after the user clicks a button in the dialog. The URL you specify must be a URL of with the same Base Domain as specified in your app settings. Otherwise, this URL can be anything you want it to be, as it is of no particular importance to the backbone.oauth plugin.
+* ```redirect_url``` (obligatory) The URL to redirect to after the user clicks a button in the dialog. The page you redirect to, should serve a single script (see below).
 * ```auth_url``` (obligatory) The URL to display in the OAuth dialog.
 * ```scope``` (optional) A comma separated list of permission names which you would like the user to grant your application.
 * ```state``` (optional) A unique string used to maintain application state between the request and callback. You should use this to protect against Cross-Site Request Forgery.
@@ -103,7 +103,11 @@ If you really have to, you can also override these methods.
 * ```onRedirect(params)``` Called when the OAuth dialog redirects to your redirect_url. ```params``` holds the parsed url's hash.
 * ```authSuccess(params)``` A function that returns ```true``` if the returned params indicate a successful authentication. ```params``` holds the parsed url's hash.
 
-Choosing a ```redirect_url```
------------------------------
+The file you are redirecting to...
+----------------------------------
 
-It does not really matter what redirect URL you specify, as long as it is a valid redirect URL for your OAuth provider. I recommend setting up an empty ```authcallback.html``` file and redirecting to ```www.yourwebsite.com/authcallback.html```.
+... should contain a single script:
+
+```javascript
+<script>var hash=window.location.hash;window.close();opener.OAuthRedirect(hash);</script>
+```

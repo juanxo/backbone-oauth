@@ -86,7 +86,7 @@ You will need to extend these configuration objects with at least the following 
 
 Or you can create your own configuration object, that may hold the following properties:
 
-* ```app_id``` (obligatory) Your OAuth provider's app_id.
+* ```client_id``` (obligatory) Your OAuth provider's app_id.
 * ```redirect_url``` (obligatory) The URL to redirect to after the user clicks a button in the dialog. The page you redirect to, should serve a single script (see below).
 * ```auth_url``` (obligatory) The URL to display in the OAuth dialog.
 * ```scope``` (optional) A comma separated list of permission names which you would like the user to grant your application.

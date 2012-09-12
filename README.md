@@ -95,8 +95,8 @@ Or you can create your own configuration object, that may hold the following pro
 
 You are free to override the following methods:
 
-* ```onSuccess(params)``` Called when ```authSuccess``` returned true indicating, that the authentication was successful. ```params``` holds the parsed url's hash and the access_token.
-* ```onError(params)``` Called when ```authSuccess``` returned false indicating, that the authentication failed. ```params``` holds the parsed url's hash and probably an error description.
+* ```onSuccess(params)``` Called when ```authSuccess``` returned true, indicating that the authentication was successful. ```params``` holds the parsed url's hash and the access_token.
+* ```onError(params)``` Called when ```authSuccess``` returned false, indicating that the authentication failed. ```params``` holds the parsed url's hash and probably an error description.
 
 If you really have to, you can also override these methods.
 

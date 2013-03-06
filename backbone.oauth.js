@@ -96,6 +96,9 @@
     Google: {
       auth_url: 'https://www.facebook.com/dialog/oauth',
       scope: 'https://www.googleapis.com/auth/userinfo.profile'
+    },
+    Teambox: {
+      auth_url: 'https://www.teambox.com/oauth/authorize'
     }
   };
 

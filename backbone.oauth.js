@@ -35,8 +35,7 @@
     _.extend(this, options);
 
     // Make the onRedirect function publicy available.
-    _.bind(this.onRedirect, this);
-    window.OAuthRedirect = this.onRedirect;
+    window.OAuthRedirect = _.bind(this.onRedirect, this);
   };
 
   // Inject methods and properties.
